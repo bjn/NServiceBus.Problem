@@ -465,6 +465,284 @@
       <returns>
       </returns>
     </member>
+    <member name="T:NServiceBus.ConfigureCriticalErrorAction">
+      <summary>
+            Allow override critical error action
+            </summary>
+    </member>
+    <member name="F:NServiceBus.ConfigureCriticalErrorAction.onCriticalErrorAction">
+      <summary>
+            Set default behavior to zeroing the number of receiving worker threads.
+            </summary>
+    </member>
+    <member name="M:NServiceBus.ConfigureCriticalErrorAction.DefineCriticalErrorAction(NServiceBus.Configure,System.Action)">
+      <summary>
+            Sets the function to be used when critical error occurs
+            </summary>
+      <param name="config">
+      </param>
+      <param name="onCriticalError">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NServiceBus.ConfigureCriticalErrorAction.OnCriticalError(NServiceBus.Configure)">
+      <summary>
+            Execute the configured Critical error action
+            </summary>
+      <param name="config">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:NServiceBus.Faults.FaultsHeaderKeys">
+      <summary>
+            Class holding keys to message headers for faults.
+            </summary>
+    </member>
+    <member name="F:NServiceBus.Faults.FaultsHeaderKeys.FailedQ">
+      <summary>
+            Header key for setting/getting the queue at which the message processing failed.
+            </summary>
+    </member>
+    <member name="T:NServiceBus.Faults.IManageMessageFailures">
+      <summary>
+            Interface for defining how message failures will be handled.
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Faults.IManageMessageFailures.SerializationFailedForMessage(NServiceBus.Unicast.Transport.TransportMessage,System.Exception)">
+      <summary>
+            Invoked when the deserialization of a message failed.
+            </summary>
+      <param name="message">
+      </param>
+      <param name="e">
+      </param>
+    </member>
+    <member name="M:NServiceBus.Faults.IManageMessageFailures.ProcessingAlwaysFailsForMessage(NServiceBus.Unicast.Transport.TransportMessage,System.Exception)">
+      <summary>
+            Invoked when a message has failed its processing the maximum number of time configured.
+            </summary>
+      <param name="message">
+      </param>
+      <param name="e">
+      </param>
+    </member>
+    <member name="M:NServiceBus.Faults.IManageMessageFailures.Init(NServiceBus.Address)">
+      <summary>
+            Initializes the fault manager
+            </summary>
+      <param name="address">The address of the message source</param>
+    </member>
+    <member name="T:NServiceBus.ConfigureFaultsForwarder">
+      <summary>
+            Contains extension methods to NServiceBus.Configure
+            </summary>
+    </member>
+    <member name="M:NServiceBus.ConfigureFaultsForwarder.MessageForwardingInCaseOfFault(NServiceBus.Configure)">
+      <summary>
+            Forward messages that have repeatedly failed to another endpoint.
+            </summary>
+      <param name="config">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="P:NServiceBus.ConfigureFaultsForwarder.ErrorQueue">
+      <summary>
+            The queue to which to forward errors.
+            </summary>
+    </member>
+    <member name="T:NServiceBus.Config.MessageForwardingInCaseOfFaultConfig">
+      <summary>
+            Message Forwarding In Case Of Fault Config
+            </summary>
+    </member>
+    <member name="P:NServiceBus.Config.MessageForwardingInCaseOfFaultConfig.ErrorQueue">
+      <summary>
+            The queue to which errors will be forwarded.
+            </summary>
+    </member>
+    <member name="T:NServiceBus.Faults.Forwarder.ExceptionSanitizer">
+      <summary>
+            Exception Sanitizer
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Faults.Forwarder.ExceptionSanitizer.Sanitize(System.Exception)">
+      <summary>
+            Creates a new exception out of Original Exception
+            </summary>
+      <param name="original">Original exception</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:NServiceBus.Faults.Forwarder.FaultManager">
+      <summary>
+            Implementation of IManageMessageFailures by forwarding messages
+            using ISendMessages.
+            </summary>
+    </member>
+    <member name="P:NServiceBus.Faults.Forwarder.FaultManager.ErrorQueue">
+      <summary>
+            Endpoint to which message failures are forwarded
+            </summary>
+    </member>
+    <member name="P:NServiceBus.Faults.Forwarder.FaultManager.RetriesErrorQueue">
+      <summary>
+            The address of the Second Level Retries input queue when SLR is enabled
+            </summary>
+    </member>
+    <member name="P:NServiceBus.Faults.Forwarder.FaultManager.SanitizeProcessingExceptions">
+      <summary>
+            Indicates of exceptions should be sanitized before sending them on
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Faults.Forwarder.MessageHelpers.GetLabelWithoutFailedQueue(System.Messaging.Message)">
+      <summary>
+            For compatibility with V2.6:
+            Gets the label of the message stripping out the failed queue.
+            </summary>
+      <param name="m">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NServiceBus.Faults.Forwarder.MessageHelpers.GetFailedQueueFromLabel(System.Messaging.Message)">
+      <summary>
+            For compatibility with V2.6:
+            Returns the queue whose process failed processing the given message
+            by accessing the label of the message.
+            </summary>
+      <param name="m">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:NServiceBus.ConfigureInMemoryFaultManagement">
+      <summary>
+            Contains extension methods to NServiceBus.Configure
+            </summary>
+    </member>
+    <member name="M:NServiceBus.ConfigureInMemoryFaultManagement.InMemoryFaultManagement(NServiceBus.Configure)">
+      <summary>
+            Use in-memory fault management.
+            </summary>
+      <param name="config">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:NServiceBus.Faults.InMemory.FaultManager">
+      <summary>
+            Logging implementation of IManageMessageFailures.
+            </summary>
+    </member>
+    <member name="T:NServiceBus.Installation.IEnvironment">
+      <summary>
+            Interface for Environment
+            </summary>
+    </member>
+    <member name="T:NServiceBus.Installation.INeedToInstallSomething">
+      <summary>
+            Interface invoked by the infrastructure when going to install an endpoint.
+            Implementors are invoked after <see cref="T:NServiceBus.Installation.INeedToInstallInfrastructure" />.
+            Implementors should not implement this type directly but rather the generic version of it.
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Installation.INeedToInstallSomething.Install(System.Security.Principal.WindowsIdentity)">
+      <summary>
+            Performs the installation providing permission for the given user.
+            </summary>
+      <param name="identity">The user for whom permissions will be given.</param>
+    </member>
+    <member name="T:NServiceBus.Installation.INeedToInstallInfrastructure">
+      <summary>
+            Interface invoked by the infrastructure when going to install an endpoint.
+            Implementors should not implement this type directly but rather the generic version of it.
+            </summary>
+    </member>
+    <member name="T:NServiceBus.Installation.INeedToInstallInfrastructure`1">
+      <summary>
+            Interface invoked by the infrastructure when going to install an endpoint for a specific environment.
+            Implementors invoked before <see cref="T:NServiceBus.Installation.INeedToInstallSomething" />.
+            </summary>
+      <typeparam name="T">
+      </typeparam>
+    </member>
+    <member name="T:NServiceBus.Installation.INeedToInstallSomething`1">
+      <summary>
+            Interface invoked by the infrastructure when going to install an endpoint for a specific environment.
+            </summary>
+      <typeparam name="T">The environment type.</typeparam>
+    </member>
+    <member name="T:NServiceBus.Install">
+      <summary>
+            Contains extension methods to the Configure class.
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Install.Test">
+      <summary>
+            Test Method for Installation
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Install.ForInstallationOn``1(NServiceBus.Configure)">
+      <summary>
+            Indicates which environment is going to be installed, specifying that resources 
+            to be created will be provided permissions for the currently logged on user.
+            </summary>
+      <typeparam name="T">The environment type.</typeparam>
+      <param name="config">Extension method object.</param>
+      <returns>An Installer object whose Install method should be invoked.</returns>
+    </member>
+    <member name="M:NServiceBus.Install.ForInstallationOn``1(NServiceBus.Configure,System.Nullable{System.IntPtr})">
+      <summary>
+            Indicates which environment is going to be installed, specifying that resources 
+            to be created will be provided permissions for the user represented by the userToken
+            (where not the currently logged on user) or the currently logged on user.
+            </summary>
+      <typeparam name="T">The environment type.</typeparam>
+      <param name="config">Extension method object.</param>
+      <param name="userToken">A token that will be used to create a <see cref="T:System.Security.Principal.WindowsIdentity" />.</param>
+      <returns>An Installer object whose Install method should be invoked.</returns>
+    </member>
+    <member name="T:NServiceBus.Installer`1">
+      <summary>
+            Resolves objects who implement INeedToInstall and invokes them for the given environment.
+            Assumes that implementors have already been registered in the container.
+            </summary>
+      <typeparam name="T">The environment for which the installers should be invoked.</typeparam>
+    </member>
+    <member name="M:NServiceBus.Installer`1.#ctor(System.Security.Principal.WindowsIdentity)">
+      <summary>
+            Initializes a new instance of the Installer
+            </summary>
+      <param name="identity">WindowsIdentity</param>
+    </member>
+    <member name="M:NServiceBus.Installer`1.Install">
+      <summary>
+            Invokes installers for the given environment
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Installer`1.InstallInfrastructureInstallers">
+      <summary>
+            Invokes only Infrastructure installers for the given environment.
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Installer`1.InstallOtherInstallers">
+      <summary>
+            Invokes only 'Something' - other than infrastructure,  installers for the given environment.
+            </summary>
+    </member>
+    <member name="P:NServiceBus.Installer`1.RunInfrastructureInstallers">
+      <summary>
+            Gets or sets RunInfrastructureInstallers 
+            </summary>
+    </member>
+    <member name="P:NServiceBus.Installer`1.RunOtherInstallers">
+      <summary>
+            Gets or sets RunOtherInstallers 
+            </summary>
+    </member>
     <member name="T:NServiceBus.Config.Logging">
       <summary>
             Logging ConfigurationSection
@@ -510,6 +788,43 @@
       <summary>
             Configure NServiceBus to use Log4Net and specify your own configuration.
             Use 'log4net.Config.XmlConfigurator.Configure' as the parameter to get the configuration from the app.config.
+            </summary>
+    </member>
+    <member name="T:NServiceBus.MessageHeaders.MessageHeaderManager">
+      <summary>
+            Message Header Manager
+            </summary>
+    </member>
+    <member name="M:NServiceBus.MessageHeaders.MessageHeaderManager.GetHeader(System.Object,System.String)">
+      <summary>
+            Gets the Header for the Message
+            </summary>
+      <param name="message">message for which Headers to be find</param>
+      <param name="key">Key</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NServiceBus.MessageHeaders.MessageHeaderManager.SetHeader(System.Object,System.String,System.String)">
+      <summary>
+            Sets the Header for the Message
+            </summary>
+      <param name="message">
+      </param>
+      <param name="key">
+      </param>
+      <param name="value">
+      </param>
+    </member>
+    <member name="M:NServiceBus.MessageHeaders.MessageHeaderManager.GetStaticOutgoingHeaders">
+      <summary>
+            Gets Static Outgoing Headers
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="P:NServiceBus.MessageHeaders.MessageHeaderManager.Bus">
+      <summary>
+            Bus
             </summary>
     </member>
     <member name="T:NServiceBus.MessageInterfaces.IMessageMapper">
@@ -1084,25 +1399,6 @@
       <returns>
       </returns>
     </member>
-    <member name="T:NServiceBus.ConfigureInMemorySagaPersister">
-      <summary>
-            Contains extension methods to NServiceBus.Configure for the in memory saga persister.
-            </summary>
-    </member>
-    <member name="M:NServiceBus.ConfigureInMemorySagaPersister.InMemorySagaPersister(NServiceBus.Configure)">
-      <summary>
-            Use the in memory saga persister implementation.
-            </summary>
-      <param name="config">
-      </param>
-      <returns>
-      </returns>
-    </member>
-    <member name="T:NServiceBus.SagaPersisters.InMemory.InMemorySagaPersister">
-      <summary>
-            In memory implementation of ISagaPersister for quick development.
-            </summary>
-    </member>
     <member name="T:NServiceBus.Sagas.Impl.AutoCorrelateSagaOnReplyMutator">
       <summary>
             Promotes the saga id and type headers on replies(bus.Reply|bus.Return) so that the saga can be 
@@ -1648,6 +1944,89 @@
       <summary>
             Get whether an integer represents a legal XML 1.0 character. See the  
             specification at w3.org for these characters.
+            </summary>
+    </member>
+    <member name="T:NServiceBus.Unicast.Transport.CompletionMessage">
+      <summary>
+            Used for compatibility with 2.6 endpoints.
+            </summary>
+    </member>
+    <member name="P:NServiceBus.Unicast.Transport.CompletionMessage.ErrorCode">
+      <summary>
+            Gets/sets a code specifying the type of error that occurred.
+            </summary>
+    </member>
+    <member name="T:NServiceBus.Unicast.BackwardCompatibility.ConfigureBackwardCompatilibity">
+      <summary>
+            Register CompletionMessage as system message 
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Unicast.BackwardCompatibility.ConfigureBackwardCompatilibity.Init">
+      <summary>
+            Register CompletionMessage as system message
+            </summary>
+    </member>
+    <member name="T:NServiceBus.Unicast.BackwardCompatibility.IncomingReturnMessageMutator">
+      <summary>
+            If this is a V26 message, extract completion message return error code and place it in the transport headers
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Unicast.BackwardCompatibility.IncomingReturnMessageMutator.MutateIncoming(System.Object)">
+      <summary>
+            If this is a completion message from a 2.6 sender, copy the error code.
+            </summary>
+      <param name="message">Message to copy ErrorCode from.</param>
+      <returns>Same message as received.</returns>
+    </member>
+    <member name="M:NServiceBus.Unicast.BackwardCompatibility.IncomingReturnMessageMutator.Init">
+      <summary>
+            Register the IncomingReturnMessageMutator
+            </summary>
+    </member>
+    <member name="P:NServiceBus.Unicast.BackwardCompatibility.IncomingReturnMessageMutator.Bus">
+      <summary>
+            Reference to the BUS to get a hold of the current TransportMessage
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Unicast.BackwardCompatibility.IncomingSubscriptionMessageMutator.MutateIncoming(NServiceBus.Unicast.Transport.TransportMessage)">
+      <summary>
+            Re-Adjust V3.0.0 subscribe and  unsubscribe messages. 
+            Version 3.0.0 subscribe and unsubscribe message have no NServiceBus.Version set it the headers.
+            Version 3.0.0 Send message have it with "3.0.0" set as value.
+            Do nothing If it is  a V2.6 message (contains EnclosedMessageTypes key).
+            </summary>
+      <param name="transportMessage">
+      </param>
+    </member>
+    <member name="M:NServiceBus.Unicast.BackwardCompatibility.IncomingSubscriptionMessageMutator.Init">
+      <summary>
+            Register the IncomingSubscriptionMessageMutator mutator
+            </summary>
+    </member>
+    <member name="T:NServiceBus.Unicast.BackwardCompatibility.OutgoingSubscriptionMessageMutator">
+      <summary>
+            Allow for a V3.X subscriber to subscribe/unsubscribe to a V2.6 publisher
+            </summary>
+    </member>
+    <member name="M:NServiceBus.Unicast.BackwardCompatibility.OutgoingSubscriptionMessageMutator.MutateOutgoing(System.Object[],NServiceBus.Unicast.Transport.TransportMessage)">
+      <summary>
+            Allow for a V3.X subscriber to subscribe/unsubscribe to a V2.6 publisher
+            Mutate outgoing subscribe/unsubscribe messages: Create and serialize a completion message into the 
+            body of the transport message.
+            </summary>
+      <param name="messages">
+      </param>
+      <param name="transportMessage">
+      </param>
+    </member>
+    <member name="M:NServiceBus.Unicast.BackwardCompatibility.OutgoingSubscriptionMessageMutator.Init">
+      <summary>
+            Register the OutgoingSubscriptionMessageMutator mutator
+            </summary>
+    </member>
+    <member name="P:NServiceBus.Unicast.BackwardCompatibility.OutgoingSubscriptionMessageMutator.MessageSerializer">
+      <summary>
+            Gets or sets the message serializer
             </summary>
     </member>
     <member name="T:NServiceBus.Unicast.Config.ConfigUnicastBus">
@@ -3062,26 +3441,6 @@
             Version of the message
             </summary>
     </member>
-    <member name="T:NServiceBus.ConfigureInMemorySubscriptionStorage">
-      <summary>
-            Contains extension methods to NServiceBus.Configure.
-            </summary>
-    </member>
-    <member name="M:NServiceBus.ConfigureInMemorySubscriptionStorage.InMemorySubscriptionStorage(NServiceBus.Configure)">
-      <summary>
-            Stores subscription data in memory.
-            This storage are for development scenarios only
-            </summary>
-      <param name="config">
-      </param>
-      <returns>
-      </returns>
-    </member>
-    <member name="T:NServiceBus.Unicast.Subscriptions.InMemory.InMemorySubscriptionStorage">
-      <summary>
-            In memory implementation of the subscription storage
-            </summary>
-    </member>
     <member name="T:NServiceBus.Unicast.Subscriptions.Msmq.Config.Installer">
       <summary>
             Class responssible for installing the MSMQ subscription storage.
@@ -3547,6 +3906,22 @@
     <member name="P:NServiceBus.Config.MsmqTransportConfig.DoNotCreateQueues">
       <summary>
             Indicates that queues should not be created.
+            </summary>
+    </member>
+    <member name="T:NServiceBus.UnitOfWork.IManageUnitsOfWork">
+      <summary>
+            Interface used by NServiceBus to manage units of work as a part of the
+            message processing pipeline.
+            </summary>
+    </member>
+    <member name="M:NServiceBus.UnitOfWork.IManageUnitsOfWork.Begin">
+      <summary>
+            Called before all message handlers and modules
+            </summary>
+    </member>
+    <member name="M:NServiceBus.UnitOfWork.IManageUnitsOfWork.End(System.Exception)">
+      <summary>
+            Called after all message handlers and modules, if an error has occured the excption will be passed
             </summary>
     </member>
     <member name="T:NServiceBus.DateTimeExtensions">
@@ -7400,7 +7775,7 @@
             <list type="bullet"><item>Common.Logging to render its output to log4net, see <see cref="T:Common.Logging.Log4Net.Log4NetLoggerFactoryAdapter" />.</item><item>log4net to render its output to Common.Logging use <see cref="T:Common.Logging.Log4Net.CommonLoggingAppender" />.</item></list></para>
       </summary>
     </member>
-    <member name="T:Common.Logging.Log4Net240805.AssemblyDoc">
+    <member name="T:Common.Logging.Log4Net240941.AssemblyDoc">
       <summary>
         <para>This assembly contains the adapter to the log4net 1.2.10 library</para>
         <para>For an example on how to configure
