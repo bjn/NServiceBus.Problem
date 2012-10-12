@@ -1,17 +1,17 @@
 NServiceBus.Problem
 ===================
 
-# Set startup projects in solution to
+1. Set startup projects in solution to
   Client (console application)
   Server (nservicebus host)
 
-# Make sure server is set to start nservicebus.host.exe in properties/debug
+2. Make sure server is set to start nservicebus.host.exe in properties/debug
 
-# Run solution (don't debug)
+3. Run solution (don't debug)
 
-# From the client, just press any key except 'q' to send a message to the server
+4. From the client, just press any key except 'q' to send a message to the server
 
-# Server should receive EventA, publish EventB, receive EventB, publish EventC, Receive EventC and mark as complete.
+5. Server should receive EventA, publish EventB, receive EventB, publish EventC, Receive EventC and mark as complete.
 
 After a few times this exception is thrown:
 
