@@ -1,6 +1,20 @@
 NServiceBus.Problem
 ===================
 
+# Set startup projects in solution to
+  Client (console application)
+  Server (nservicebus host)
+
+# Make sure server is set to start nservicebus.host.exe in properties/debug
+
+# Run solution (don't debug)
+
+# From the client, just press any key except 'q' to send a message to the server
+
+# Server should receive EventA, publish EventB, receive EventB, publish EventC, Receive EventC and mark as complete.
+
+After a few times this exception is thrown:
+
 2012-10-12 20:44:08,214 [Worker.14] WARN  NServiceBus.Unicast.Transport.Transact
 ional.TransactionalTransport [(null)] <(null)> - Failed raising 'transport messa
 ge received' event for message with ID=bad8ccdb-65ca-4d8c-9502-2a73f4dad1a8\179088
