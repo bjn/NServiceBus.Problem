@@ -1,6 +1,25 @@
 NServiceBus.Problem
 ===================
 
+Introduction
+--------------------
+Simple client/server application.
+
+The client sends EventA to the server.
+In EventA there is a CorrelationId set.
+
+In the server when it receives EventA it starts a saga and sets CorrelationId in saga data.
+CorrelationId is marked with [Unique].
+
+When EventA is received it creates an EventB and sets the CorrelationId on EventB to the one received from EventA.
+After that it publishes EventB.
+
+When EventB is received in the saga. It creates an EventC and sets the CorrelationId and publishes it.
+Last when EventC is received the saga is marked complete.
+
+Setup
+--------------------
+
 1. Set startup projects in solution to
   Client (console application)
   Server (nservicebus host)
